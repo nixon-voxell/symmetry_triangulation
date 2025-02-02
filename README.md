@@ -23,11 +23,13 @@ You can also search for `Symmetry Triangulation` in the search menu in mesh edit
 
 ![edit menu](./screenshots/edit-menu.png)
 
-## Result
+## Results
 
-![result](./screenshots/result.png)
+![result-plane](./screenshots/result-plane.png)
 
 *Note: Sometimes, the resulting triangulation might create wrong normals (as shown in the image above), when this happens, use `shift-n` to recalculate the normals.*
+
+![result-cylinder](./screenshots/result-cylinder.png)
 
 ## License
 
