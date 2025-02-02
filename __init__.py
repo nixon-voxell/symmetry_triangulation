@@ -12,44 +12,41 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-  "name" : "Cloth Exporter",
-  "author" : "Voxell",
-  "description" : "Exports data of cloth mesh",
-  "blender" : (2, 90, 0),
-  "version" : (0, 2, 0),
-  "location" : "View3D",
-  "warning" : "This is still in an extremely early version, it might break your work or crash Blender...",
-  "category" : "Generic"
+    "name" : "Symmetry Triangulation",
+    "author" : "Nixon",
+    "description" : "Blender add-on to triangulate faces with more than 3 vertices symmetrically by adding a vertex at the center.",
+    "blender" : (4, 3, 2),
+    "version" : (1, 0, 0),
+    "location" : "View3D",
+    "category" : "Generic"
 }
 
 import bpy
 
-from .operator import ClothExporter_OT_Transform, ClothExporter_OT_Export
-from .panel import ClothExporter_PT_Panel
+from .operator import *
+from .panel import SymmetryTriangulation_PT_Panel
 from .properties import Properties
 
 classes = (
-  # operators
-  ClothExporter_OT_Transform,
-  ClothExporter_OT_Export,
+    # operators
+    SymmetryTriangulation_OT_Triangulate,
 
-  # panels
-  ClothExporter_PT_Panel,
+    # panels
+    SymmetryTriangulation_PT_Panel,
 
-  # prop_ClothExp
-  Properties
-  )
+    # prop_SymmetryTri
+    Properties
+)
 
 def register():
-  for c in classes:
-    bpy.utils.register_class(c)
-  
-  bpy.types.Scene.prop_ClothExp = bpy.props.PointerProperty(type=Properties)
+    for c in classes:
+        bpy.utils.register_class(c)
+
+    bpy.types.VIEW3D_MT_edit_mesh.append(symmetry_triangulation_menu)
+    bpy.types.Scene.prop_SymmetryTri = bpy.props.PointerProperty(type=Properties)
 
 def unregister():
-  for c in classes:
-    bpy.utils.unregister_class(c)
+    for c in classes:
+        bpy.utils.unregister_class(c)
 
-  del bpy.types.Scene.prop_ClothExp
-
-# register, unregister = bpy.utils.register_classes_factory(classes)
+    del bpy.types.Scene.prop_SymmetryTri
